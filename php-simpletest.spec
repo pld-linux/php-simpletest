@@ -1,23 +1,30 @@
-%define		php_min_version 4.0.0
+%include	/usr/lib/rpm/macros.php
+%define		php_min_version 5.2.0
 %define		pkgname	simpletest
 Summary:	Unit testing for PHP
 Name:		php-%{pkgname}
 Version:	1.0.1
-Release:	0.1
+Release:	0.6
 License:	LGPL v2.1
 Group:		Development/Languages/PHP
 Source0:	http://downloads.sourceforge.net/project/%{pkgname}/%{pkgname}/%{pkgname}_%{version}/%{pkgname}_%{version}.tar.gz
 # Source0-md5:	ab70ef7617b37a933499a630890461da
+Patch0:		no-php4.patch
 URL:		http://www.simpletest.org/
 BuildRequires:	rpmbuild(macros) >= 1.461
-Requires:	php-common >= 3:%{php_min_version}
+BuildRequires:	rpm-php-pearprov >= 4.4.2-11
+Requires:	php-common >= 4:%{php_min_version}
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_appdir			%{php_data_dir}/%{pkgname}
+#%define		_appdir			%{php_data_dir}/%{pkgname}
+%define		_appdir			%{php_pear_dir}/%{pkgname}
 
 # _phpdocdir / php_docdir / phpdoc_dir ?
 %define		_phpdocdir		%{_docdir}/phpdoc
+
+# internal deps
+%define		_noautopear	pear(\.\./.*\.php) pear(invoker.php) pear(mock_objects.php) pear(socket.php) pear(test_case.php) pear(unit_tester.php) pear(simpletest/.*)
 
 # put it together for rpmbuild
 %define		_noautoreq	%{?_noautophp} %{?_noautopear}
@@ -46,6 +53,14 @@ Dokumentacja do %{pkgname}.
 
 %prep
 %setup -qc
+
+# no php4
+mv simpletest/reflection{_php5,}.php
+rm simpletest/reflection_php4.php
+mv simpletest/test/reflection{_php5,}_test.php
+rm simpletest/test/reflection_php4_test.php
+%patch0 -p0
+
 mv %{pkgname}/docs .
 mv simpletest/[HLRV]* .
 
