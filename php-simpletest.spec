@@ -1,18 +1,17 @@
 %include	/usr/lib/rpm/macros.php
-%define		php_min_version 5.2.0
+%define		php_min_version 5.0.5
 %define		pkgname	simpletest
 Summary:	Unit testing for PHP
 Name:		php-%{pkgname}
-Version:	1.0.1
-Release:	0.6
+Version:	1.1.0
+Release:	1
 License:	LGPL v2.1
 Group:		Development/Languages/PHP
-Source0:	http://downloads.sourceforge.net/project/%{pkgname}/%{pkgname}/%{pkgname}_%{version}/%{pkgname}_%{version}.tar.gz
-# Source0-md5:	ab70ef7617b37a933499a630890461da
-Patch0:		no-php4.patch
+Source0:	http://downloads.sourceforge.net/%{pkgname}/%{pkgname}_%{version}.tar.gz
+# Source0-md5:	4888891907a2383866038de398284df9
 URL:		http://www.simpletest.org/
-BuildRequires:	rpmbuild(macros) >= 1.461
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
+BuildRequires:	rpmbuild(macros) >= 1.461
 Requires:	php-common >= 4:%{php_min_version}
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -53,14 +52,6 @@ Dokumentacja do %{pkgname}.
 
 %prep
 %setup -qc
-
-# no php4
-mv simpletest/reflection{_php5,}.php
-rm simpletest/reflection_php4.php
-mv simpletest/test/reflection{_php5,}_test.php
-rm simpletest/test/reflection_php4_test.php
-%patch0 -p0
-
 mv %{pkgname}/docs .
 mv simpletest/[HLRV]* .
 
