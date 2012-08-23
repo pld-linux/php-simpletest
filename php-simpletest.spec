@@ -4,7 +4,7 @@
 Summary:	Unit testing for PHP
 Name:		php-%{pkgname}
 Version:	1.1.0
-Release:	1
+Release:	2
 License:	LGPL v2.1
 Group:		Development/Languages/PHP
 Source0:	http://downloads.sourceforge.net/%{pkgname}/%{pkgname}_%{version}.tar.gz
@@ -12,7 +12,7 @@ Source0:	http://downloads.sourceforge.net/%{pkgname}/%{pkgname}_%{version}.tar.g
 URL:		http://www.simpletest.org/
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 BuildRequires:	rpmbuild(macros) >= 1.461
-Requires:	php-common >= 4:%{php_min_version}
+Requires:	php(core) >= %{php_min_version}
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
