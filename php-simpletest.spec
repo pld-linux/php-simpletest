@@ -3,7 +3,7 @@
 Summary:	Unit testing for PHP
 Name:		php-%{pkgname}
 Version:	1.1.0
-Release:	2
+Release:	3
 License:	LGPL v2.1
 Group:		Development/Languages/PHP
 Source0:	http://downloads.sourceforge.net/%{pkgname}/%{pkgname}_%{version}.tar.gz
