@@ -3,7 +3,7 @@
 Summary:	Unit testing for PHP
 Name:		php-%{pkgname}
 Version:	1.1.0
-Release:	3
+Release:	4
 License:	LGPL v2.1
 Group:		Development/Languages/PHP
 Source0:	http://downloads.sourceforge.net/%{pkgname}/%{pkgname}_%{version}.tar.gz
@@ -22,10 +22,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_phpdocdir		%{_docdir}/phpdoc
 
 # internal deps
-%define		_noautopear	pear(\.\./.*\.php) pear(invoker.php) pear(mock_objects.php) pear(socket.php) pear(test_case.php) pear(unit_tester.php) pear(simpletest/.*)
-
-# put it together for rpmbuild
-%define		_noautoreq	%{?_noautophp} %{?_noautopear}
+%define		_noautoreq_pear		../.*.php invoker.php mock_objects.php socket.php test_case.php unit_tester.php simpletest/.*
 
 %description
 SimpleTest is an open source unit test framework for the PHP
